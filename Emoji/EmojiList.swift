@@ -8,38 +8,25 @@
 
 import SwiftUI
 
-//let emojiData: [[Emoji]] = {
-//    // File taken from https://unicode.org/Public/emoji/11.0/emoji-sequences.txt
-//    let path = Bundle.main.path(forResource: "emoji-data", ofType: "txt")!
-//    let data = FileManager.default.contents(atPath: path)
-//    return emojisFromRawData(data).chunked(into: 5)
-//}()
-
-let emojiData: String = {
+let emojiData: [Emoji] = {
+    // File taken from https://unicode.org/Public/emoji/11.0/emoji-sequences.txt
     let path = Bundle.main.path(forResource: "emoji-data", ofType: "txt")!
     let data = FileManager.default.contents(atPath: path)
-    return emojisFromRawData(data).map { $0.emoji }.joined(separator: " ")
+    return emojisFromRawData(data)
 }()
 
 struct EmojiList : View {
     var body: some View {
-//        List(emojiData.identified(by: \.[0].id)) { emojiChunk in
-//            EmojiRow(emojis: emojiChunk)
-//        }
+        let xCount = 5
+        let chunkedData = emojiData.chunked(into: xCount)
 
-        NavigationView {
-            ScrollView {
-                Text(emojiData)
-                    .lineLimit(nil)
-                    .font(.system(size: 60))
-                    .frame(width: UIScreen.main.bounds.width, height: 30000, alignment: .top)
-            }
-
-            .navigationBarTitle(Text("Emojis"))
+        return List(chunkedData.identified(by: \.[0].id)) { emojiChunk in
+            EmojiRow(emojis: emojiChunk)
         }
     }
 }
 
+// MARK: - Helper
 
 enum DataSource {
     case internet(path: String)

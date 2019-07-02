@@ -13,9 +13,19 @@ struct EmojiRow: View {
     var emojis: [Emoji]
 
     var body: some View {
-        HStack(spacing: 10) {
+
+        HStack {
+
             ForEach(self.emojis) { emoji in
-                Text(emoji.emoji).font(.largeTitle)
+
+                Button(emoji.emoji, action: {})
+                    .frame(width: (UIScreen.main.bounds.width - (CGFloat(self.emojis.count+1) * 12)) / CGFloat(self.emojis.count),
+                           height: (UIScreen.main.bounds.width - (CGFloat(self.emojis.count+1) * 12)) / CGFloat(self.emojis.count),
+                           alignment: .center)
+                    .font(.system(size: 44))
+//                    .background(Color.red)
+
+                Spacer(minLength: 12)
             }
         }
     }
