@@ -15,18 +15,30 @@ let emojiData: [Emoji] = {
     return emojisFromRawData(data)
 }()
 
+//let emojiData: String = {
+//    let path = Bundle.main.path(forResource: "emoji-data", ofType: "txt")!
+//    let data = FileManager.default.contents(atPath: path)
+//    return emojisFromRawData(data).map { $0.emoji }.joined(separator: " ")
+//}()
+
 struct EmojiList : View {
     var body: some View {
-        let xCount = 5
-        let chunkedData = emojiData.chunked(into: xCount)
 
-        return List(chunkedData.identified(by: \.[0].id)) { emojiChunk in
+        List(emojiData.chunked(into: 5).identified(by: \.[0].id)) { emojiChunk in
             EmojiRow(emojis: emojiChunk)
         }
+
+//        ScrollView {
+//            VStack {
+//                Text(emojiData)
+//                    .lineLimit(nil)
+//                    .font(.largeTitle)
+//                    .frame(idealHeight: .infinity)
+//            }
+//        }
     }
 }
 
-// MARK: - Helper
 
 enum DataSource {
     case internet(path: String)
