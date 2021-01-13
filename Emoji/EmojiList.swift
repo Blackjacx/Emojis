@@ -5,6 +5,7 @@
 //  Created by Stefan Herold on 02.07.19.
 //  Copyright © 2019 Coding Cobra. All rights reserved.
 //
+// Find emoji data at https://unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt
 
 import SwiftUI
 
