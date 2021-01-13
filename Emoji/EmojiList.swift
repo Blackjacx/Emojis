@@ -18,13 +18,14 @@ let emojiData: [Emoji] = {
 //let emojiData: String = {
 //    let path = Bundle.main.path(forResource: "emoji-data", ofType: "txt")!
 //    let data = FileManager.default.contents(atPath: path)
-//    return emojisFromRawData(data).map { $0.emoji }.joined(separator: " ")
+//    let emojis = emojisFromRawData(data).map { $0.emoji }.joined(separator: " ")
+//    return emojis
 //}()
 
 struct EmojiList : View {
     var body: some View {
 
-        List(emojiData.chunked(into: 5).identified(by: \.[0].id)) { emojiChunk in
+        List(emojiData.chunked(into: 5), id: \.[0].id) { emojiChunk in
             EmojiRow(emojis: emojiChunk)
         }
 

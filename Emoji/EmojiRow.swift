@@ -18,7 +18,7 @@ struct EmojiRow: View {
 
             ForEach(self.emojis) { emoji in
 
-                Button(emoji.emoji, action: {})
+                Button(emoji.emoji, action: { print(emoji) })
                     .frame(width: (UIScreen.main.bounds.width - (CGFloat(self.emojis.count+1) * 12)) / CGFloat(self.emojis.count),
                            height: (UIScreen.main.bounds.width - (CGFloat(self.emojis.count+1) * 12)) / CGFloat(self.emojis.count),
                            alignment: .center)
