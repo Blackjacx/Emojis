@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		B93582C322CBBAF400121234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93582C222CBBAF400121234 /* AppDelegate.swift */; };
 		B93582C522CBBAF400121234 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93582C422CBBAF400121234 /* SceneDelegate.swift */; };
-		B93582C722CBBAF400121234 /* EmojiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93582C622CBBAF400121234 /* EmojiList.swift */; };
+		B93582C722CBBAF400121234 /* EmojiGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93582C622CBBAF400121234 /* EmojiGrid.swift */; };
 		B93582C922CBBAF600121234 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B93582C822CBBAF600121234 /* Assets.xcassets */; };
 		B93582CC22CBBAF600121234 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B93582CB22CBBAF600121234 /* Preview Assets.xcassets */; };
 		B93582CF22CBBAF600121234 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B93582CD22CBBAF600121234 /* LaunchScreen.storyboard */; };
 		B93582D722CBBB3000121234 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93582D622CBBB3000121234 /* Emoji.swift */; };
-		B93582D922CBBDBE00121234 /* EmojiRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93582D822CBBDBE00121234 /* EmojiRow.swift */; };
+		B93582D922CBBDBE00121234 /* EmojiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93582D822CBBDBE00121234 /* EmojiButton.swift */; };
 		B93582DB22CBBEA400121234 /* emoji-data.txt in Resources */ = {isa = PBXBuildFile; fileRef = B93582DA22CBBEA400121234 /* emoji-data.txt */; };
 /* End PBXBuildFile section */
 
@@ -22,13 +22,13 @@
 		B93582BF22CBBAF400121234 /* Emoji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Emoji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B93582C222CBBAF400121234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B93582C422CBBAF400121234 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B93582C622CBBAF400121234 /* EmojiList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiList.swift; sourceTree = "<group>"; };
+		B93582C622CBBAF400121234 /* EmojiGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiGrid.swift; sourceTree = "<group>"; };
 		B93582C822CBBAF600121234 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B93582CB22CBBAF600121234 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B93582CE22CBBAF600121234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B93582D022CBBAF600121234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B93582D622CBBB3000121234 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
-		B93582D822CBBDBE00121234 /* EmojiRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiRow.swift; sourceTree = "<group>"; };
+		B93582D822CBBDBE00121234 /* EmojiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiButton.swift; sourceTree = "<group>"; };
 		B93582DA22CBBEA400121234 /* emoji-data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "emoji-data.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,8 +65,8 @@
 				B93582D022CBBAF600121234 /* Info.plist */,
 				B93582C222CBBAF400121234 /* AppDelegate.swift */,
 				B93582D622CBBB3000121234 /* Emoji.swift */,
-				B93582C622CBBAF400121234 /* EmojiList.swift */,
-				B93582D822CBBDBE00121234 /* EmojiRow.swift */,
+				B93582D822CBBDBE00121234 /* EmojiButton.swift */,
+				B93582C622CBBAF400121234 /* EmojiGrid.swift */,
 				B93582C422CBBAF400121234 /* SceneDelegate.swift */,
 				B93582DA22CBBEA400121234 /* emoji-data.txt */,
 				B93582C822CBBAF600121234 /* Assets.xcassets */,
@@ -159,8 +159,8 @@
 				B93582C322CBBAF400121234 /* AppDelegate.swift in Sources */,
 				B93582C522CBBAF400121234 /* SceneDelegate.swift in Sources */,
 				B93582D722CBBB3000121234 /* Emoji.swift in Sources */,
-				B93582D922CBBDBE00121234 /* EmojiRow.swift in Sources */,
-				B93582C722CBBAF400121234 /* EmojiList.swift in Sources */,
+				B93582D922CBBDBE00121234 /* EmojiButton.swift in Sources */,
+				B93582C722CBBAF400121234 /* EmojiGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -284,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

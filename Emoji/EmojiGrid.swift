@@ -9,41 +9,33 @@
 
 import SwiftUI
 
-let emojiData: [Emoji] = {
-    // File taken from https://unicode.org/Public/emoji/11.0/emoji-sequences.txt
+let emojis: [Emoji] = {
     let path = Bundle.main.path(forResource: "emoji-data", ofType: "txt")!
     let data = FileManager.default.contents(atPath: path)
     return emojisFromRawData(data)
 }()
 
-//let emojiData: String = {
-//    let path = Bundle.main.path(forResource: "emoji-data", ofType: "txt")!
-//    let data = FileManager.default.contents(atPath: path)
-//    let emojis = emojisFromRawData(data).map { $0.emoji }.joined(separator: " ")
-//    return emojis
-//}()
+struct EmojiGrid : View {
 
-struct EmojiList : View {
+    let columns = [
+        GridItem(.adaptive(minimum: 44))
+    ]
+
     var body: some View {
-
-        List(emojiData.chunked(into: 5), id: \.[0].id) { emojiChunk in
-            EmojiRow(emojis: emojiChunk)
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 12, content: {
+                ForEach(emojis, id: \.id) { emoji in
+                    EmojiButton(emoji: emoji)
+                }
+            })
+            .padding([.trailing, .leading], 12)
         }
-
-//        ScrollView {
-//            VStack {
-//                Text(emojiData)
-//                    .lineLimit(nil)
-//                    .font(.largeTitle)
-//                    .frame(idealHeight: .infinity)
-//            }
-//        }
     }
 }
 
 
 enum DataSource {
-    case internet(path: String)
+    case remote(url: URL)
     case local(path: String)
 }
 
@@ -60,14 +52,7 @@ func readEmojiData(from source: DataSource, completion: @escaping RequestComplet
                 completion( emojisFromRawData(data) )
             }
 
-        case .internet(let path):
-            guard let url = URL(string: path) else {
-                DispatchQueue.main.async {
-                    completion( [] )
-                }
-                return
-            }
-
+        case .remote(let url):
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
 
                 guard error == nil else {
@@ -108,27 +93,15 @@ func emojisForSingleLine(_ line: String) -> [Emoji]? {
     // extract unicode range
     let components = trimmed
         .components(separatedBy: ";")
-        .map { $0.trimmingCharacters(in: .whitespaces) }
+        .map({ $0.trimmingCharacters(in: .whitespaces) })
 
-    guard let unicodeRange = components.first else { return nil }
-
-    // split into start and end indices
-    let unicodeSequence = unicodeRange
-        .components(separatedBy: "..")
-        .map { $0.trimmingCharacters(in: .whitespaces) }
-
-    guard let metaSection = components.last else { return nil }
-
-    guard let type = metaSection
-        .components(separatedBy: "#")
-        .first?
-        .trimmingCharacters(in: .whitespaces), type == "Emoji" else { return nil }
-
-    guard let unicodeVersion = metaSection.components(separatedBy: "#")
-        .last?
-        .components(separatedBy: "[")
-        .first?
-        .trimmingCharacters(in: .whitespaces) else { return nil }
+    guard let unicodeSequence = components.first?.components(separatedBy: ".."),
+          let metaComponents = components.last?.components(separatedBy: "#"),
+          let type = metaComponents.first?.trimmingCharacters(in: .whitespaces),
+          type == "Emoji",
+          let unicodeVersion = metaComponents.last?.components(separatedBy: "[")
+            .first?
+            .trimmingCharacters(in: .whitespaces) else { return nil }
 
     return convertToUInt32Array(unicodeSequence)
         .compactMap { UnicodeScalar($0) }
@@ -157,7 +130,7 @@ extension Array {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        EmojiList()
+        EmojiGrid()
     }
 }
 #endif
