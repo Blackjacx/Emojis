@@ -16,11 +16,18 @@ class EmojiArray: ObservableObject {
 
     @Published var values: [Emoji] = []
 
+    var remoteVersion: Emoji.Version {
+        didSet {
+            readEmojiData(from: .remote(url: remoteVersion.url))
+        }
+    }
+
     private var cancellable: Any?
     private var urlSession = URLSession.shared
 
-    init(source: DataSource) {
-        readEmojiData(from: source)
+    init(remoteVersion: Emoji.Version) {
+        self.remoteVersion = remoteVersion
+        readEmojiData(from: .remote(url: remoteVersion.url))
     }
 
     private func readEmojiData(from source: DataSource) {
@@ -90,5 +97,23 @@ class EmojiArray: ObservableObject {
         case 1:     return converted
         default:    return []
         }
+    }
+}
+
+extension Emoji.Version {
+
+    var url: URL {
+        let urlString: String
+        switch self {
+        case .v2_0: urlString = "https://unicode.org/Public/emoji/2.0/emoji-data.txt"
+        case .v3_0: urlString = "https://unicode.org/Public/emoji/3.0/emoji-data.txt"
+        case .v4_0: urlString = "https://unicode.org/Public/emoji/4.0/emoji-data.txt"
+        case .v5_0: urlString = "https://unicode.org/Public/emoji/5.0/emoji-data.txt"
+        case .v11_0: urlString = "https://unicode.org/Public/emoji/11.0/emoji-data.txt"
+        case .v12_0: urlString = "https://unicode.org/Public/emoji/12.0/emoji-data.txt"
+        case .v12_1: urlString = "https://unicode.org/Public/emoji/12.1/emoji-data.txt"
+        case .v13_0: urlString = "https://unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt"
+        }
+        return URL(string: urlString)!
     }
 }

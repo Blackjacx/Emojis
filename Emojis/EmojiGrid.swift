@@ -10,29 +10,38 @@ import SwiftUI
 
 struct EmojiGrid : View {
 
-    @ObservedObject var emojiArray = EmojiArray(source: .remote(url: URL(string: urls[0])!))
+    @ObservedObject var emojiArray = EmojiArray(remoteVersion: .v13_0)
     @ScaledMetric(relativeTo: .largeTitle) var spacing: CGFloat = 12
     @ScaledMetric(relativeTo: .largeTitle) var size: CGFloat = 50
 
     private var columns: [GridItem] {
         [GridItem(.adaptive(minimum: size))]
     }
-    private static let urls = [
-        "https://unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt"
-    ]
+
+    private var versions: [Emoji.Version] {
+        Emoji.Version.allCases.map { $0 }.sorted().reversed()
+    }
 
     var body: some View {
-
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: spacing, content: {
-                ForEach(emojiArray.values, id: \.id) { emoji in
-                    Button(emoji.emoji, action: { print(emoji) })
-                        .font(.largeTitle)
-                        .frame(width: size, height: size, alignment: .center)
-//                        .background(Color.red)
-                }
-            })
-            .padding([.trailing, .leading], spacing)
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: spacing, content: {
+                    ForEach(emojiArray.values, id: \.id) { emoji in
+                        Button(emoji.emoji, action: { print(emoji) })
+                            .font(.largeTitle)
+                            .frame(width: size, height: size, alignment: .center)
+                    }
+                })
+                .padding([.trailing, .leading], spacing)
+            }
+            .navigationBarTitle("Emojis v\(emojiArray.remoteVersion.rawValue) (\(emojiArray.values.count))")
+            .navigationBarItems(trailing:
+                                    Menu("Versions", content: {
+                                        ForEach(versions, id: \.self) { version in
+                                            Button(version.rawValue, action: { emojiArray.remoteVersion = version })
+                                        }
+                                    })
+            )
         }
     }
 }
