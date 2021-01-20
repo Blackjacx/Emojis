@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EmojiGrid : View {
 
-    @ObservedObject var emojiArray = EmojiArray(remoteVersion: .v13_0)
+    @ObservedObject var fetcher = EmojiFetcher(dataSource: .remote(version: .v13_0))
     @ScaledMetric(relativeTo: .largeTitle) var spacing: CGFloat = 12
     @ScaledMetric(relativeTo: .largeTitle) var size: CGFloat = 50
 
@@ -26,7 +26,7 @@ struct EmojiGrid : View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: spacing, content: {
-                    ForEach(emojiArray.values, id: \.id) { emoji in
+                    ForEach(fetcher.emojis, id: \.id) { emoji in
                         Button(emoji.emoji, action: { print(emoji) })
                             .font(.largeTitle)
                             .frame(width: size, height: size, alignment: .center)
@@ -34,11 +34,13 @@ struct EmojiGrid : View {
                 })
                 .padding([.trailing, .leading], spacing)
             }
-            .navigationBarTitle("Emojis v\(emojiArray.remoteVersion.rawValue) (\(emojiArray.values.count))")
+            .navigationBarTitle("Emojis v\(fetcher.dataSource.version.rawValue) (\(fetcher.emojis.count))")
             .navigationBarItems(trailing:
                                     Menu("Versions", content: {
                                         ForEach(versions, id: \.self) { version in
-                                            Button(version.rawValue, action: { emojiArray.remoteVersion = version })
+                                            Button(version.rawValue, action: {
+                                                fetcher.dataSource = .remote(version: version)
+                                            })
                                         }
                                     })
             )

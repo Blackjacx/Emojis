@@ -1,5 +1,5 @@
 //
-//  EmojiArray.swift
+//  EmojiFetcher.swift
 //  Emojis
 //
 //  Created by Stefan Herold on 19.01.21.
@@ -7,50 +7,56 @@
 
 import SwiftUI
 
-class EmojiArray: ObservableObject {
+class EmojiFetcher: ObservableObject {
 
     enum DataSource {
-        case remote(url: URL)
-        case local(path: String)
+        case remote(version: Emoji.Version)
+        case local(version: Emoji.Version)
+
+        var version: Emoji.Version {
+            switch self {
+            case .remote(let version), .local(let version):
+                return version
+            }
+        }
     }
 
-    @Published var values: [Emoji] = []
-
-    var remoteVersion: Emoji.Version {
+    @Published var emojis: [Emoji] = []
+    var dataSource: DataSource {
         didSet {
-            readEmojiData(from: .remote(url: remoteVersion.url))
+            readEmojiData(from: dataSource)
         }
     }
 
     private var cancellable: Any?
     private var urlSession = URLSession.shared
 
-    init(remoteVersion: Emoji.Version) {
-        self.remoteVersion = remoteVersion
-        readEmojiData(from: .remote(url: remoteVersion.url))
+    init(dataSource: DataSource) {
+        self.dataSource = dataSource
+        readEmojiData(from: dataSource)
     }
 
-    private func readEmojiData(from source: DataSource) {
+    private func readEmojiData(from dataSource: DataSource) {
 
-        switch source {
-        case .local(let path):
-            let data = FileManager.default.contents(atPath: path)
+        switch dataSource {
+        case .local(let version):
+            let data = FileManager.default.contents(atPath: version.localPath)
             DispatchQueue.global(qos: .default).async { [weak self] in
                 guard let self = self else { return }
                 let emojis = self.emojisFromRawData(data)
                 DispatchQueue.main.async { [weak self] in
-                    self?.values = emojis
+                    self?.emojis = emojis
                 }
             }
 
-        case .remote(let url):
+        case .remote(let emojiVersion):
             cancellable = urlSession
-                .dataTaskPublisher(for: url)
+                .dataTaskPublisher(for: emojiVersion.remoteUrl)
                 .map { self.emojisFromRawData($0.data) }
                 .replaceError(with: [])
                 .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
-                .assign(to: \.values, on: self)
+                .assign(to: \.emojis, on: self)
         }
     }
 
@@ -102,7 +108,7 @@ class EmojiArray: ObservableObject {
 
 extension Emoji.Version {
 
-    var url: URL {
+    var remoteUrl: URL {
         let urlString: String
         switch self {
         case .v2_0: urlString = "https://unicode.org/Public/emoji/2.0/emoji-data.txt"
@@ -115,5 +121,9 @@ extension Emoji.Version {
         case .v13_0: urlString = "https://unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt"
         }
         return URL(string: urlString)!
+    }
+
+    var localPath: String {
+        "undefined"
     }
 }

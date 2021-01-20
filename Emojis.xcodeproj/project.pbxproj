@@ -12,7 +12,7 @@
 		B9ABF90725B786DF00E0BF58 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9ABF90625B786DF00E0BF58 /* Preview Assets.xcassets */; };
 		B9ABF91D25B7879000E0BF58 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABF91C25B7879000E0BF58 /* Emoji.swift */; };
 		B9ABF92025B7879600E0BF58 /* EmojiGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABF91F25B7879600E0BF58 /* EmojiGrid.swift */; };
-		B9ABF92925B78A1500E0BF58 /* EmojiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABF92825B78A1500E0BF58 /* EmojiArray.swift */; };
+		B9ABF92925B78A1500E0BF58 /* EmojiFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABF92825B78A1500E0BF58 /* EmojiFetcher.swift */; };
 		B9ABF92E25B78C1800E0BF58 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ABF92D25B78C1800E0BF58 /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +24,7 @@
 		B9ABF90825B786DF00E0BF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9ABF91C25B7879000E0BF58 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		B9ABF91F25B7879600E0BF58 /* EmojiGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiGrid.swift; sourceTree = "<group>"; };
-		B9ABF92825B78A1500E0BF58 /* EmojiArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArray.swift; sourceTree = "<group>"; };
+		B9ABF92825B78A1500E0BF58 /* EmojiFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiFetcher.swift; sourceTree = "<group>"; };
 		B9ABF92D25B78C1800E0BF58 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +60,7 @@
 			children = (
 				B9ABF90825B786DF00E0BF58 /* Info.plist */,
 				B9ABF91C25B7879000E0BF58 /* Emoji.swift */,
-				B9ABF92825B78A1500E0BF58 /* EmojiArray.swift */,
+				B9ABF92825B78A1500E0BF58 /* EmojiFetcher.swift */,
 				B9ABF91F25B7879600E0BF58 /* EmojiGrid.swift */,
 				B9ABF92D25B78C1800E0BF58 /* Array+Extensions.swift */,
 				B9ABF8FF25B786DD00E0BF58 /* EmojisApp.swift */,
@@ -150,7 +150,7 @@
 				B9ABF91D25B7879000E0BF58 /* Emoji.swift in Sources */,
 				B9ABF92E25B78C1800E0BF58 /* Array+Extensions.swift in Sources */,
 				B9ABF90025B786DD00E0BF58 /* EmojisApp.swift in Sources */,
-				B9ABF92925B78A1500E0BF58 /* EmojiArray.swift in Sources */,
+				B9ABF92925B78A1500E0BF58 /* EmojiFetcher.swift in Sources */,
 				B9ABF92025B7879600E0BF58 /* EmojiGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
