@@ -21,8 +21,15 @@ class EmojiFetcher: ObservableObject {
         }
     }
 
-    @Published var emojis: [Emoji] = []
-    var dataSource: DataSource {
+    @Published private(set) var isLoading: Bool = true
+
+    private(set) var emojis: [Emoji] = [] {
+        didSet {
+            isLoading = false
+        }
+    }
+
+    var dataSource: DataSource! {
         didSet {
             readEmojiData(from: dataSource)
         }
@@ -31,12 +38,9 @@ class EmojiFetcher: ObservableObject {
     private var cancellable: Any?
     private var urlSession = URLSession.shared
 
-    init(dataSource: DataSource) {
-        self.dataSource = dataSource
-        readEmojiData(from: dataSource)
-    }
+    private func readEmojiData(from dataSource: DataSource?) {
 
-    private func readEmojiData(from dataSource: DataSource) {
+        isLoading = true
 
         switch dataSource {
         case .local(let version):
@@ -57,6 +61,8 @@ class EmojiFetcher: ObservableObject {
                 .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
                 .assign(to: \.emojis, on: self)
+        case .none:
+            break
         }
     }
 
