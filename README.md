@@ -1,6 +1,7 @@
-# 🥳 😍 ❤️ ✅ 😜 👽 😈 🫀 👀 💍 🧤 💅 🙉 🐦 🦋 🐝 🪰 🌹 🍔 🍿 🚘
+[![Twitter Follow](https://img.shields.io/badge/follow-%40blackjacx-1DA1F2?logo=twitter&style=for-the-badge)](https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fgithub.com%2Fblackjacx&screen_name=Blackjacxxx)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal&style=for-the-badge)](https://www.paypal.me/STHEROLD)
 
-# Emojis
+# Emojis 🥳 😍 ❤️ ✅ 😜 👽 😈 🫀 👀 💍 🧤 💅 🙉 🐦 🦋 🐝 🪰 🌹 🍔 🍿 🚘
 
 This little **SwiftUI** project has the following features:
 
