@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class EmojiFetcher: ObservableObject {
 
@@ -35,7 +36,7 @@ class EmojiFetcher: ObservableObject {
         }
     }
 
-    private var cancellable: Any?
+    private var cancellable: Set<AnyCancellable> = []
     private var urlSession = URLSession.shared
 
     private func readEmojiData(from dataSource: DataSource?) {
@@ -54,13 +55,22 @@ class EmojiFetcher: ObservableObject {
             }
 
         case .remote(let emojiVersion):
-            cancellable = urlSession
+            urlSession
                 .dataTaskPublisher(for: emojiVersion.remoteUrl)
                 .map { self.emojisFromRawData($0.data) }
                 .replaceError(with: [])
                 .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
-                .assign(to: \.emojis, on: self)
+//                .assign(to: \.emojis, on: self)
+//                .store(in: &cancellable)
+                .map { (emo: Emoji) in
+                    urlSession.dataTaskPublisher(for: URL(string: "")!)
+                }
+                .sink(receiveCompletion: { error in
+                    print(error)
+                }, receiveValue: { [weak self] result in
+                    print(result)
+                })
         case .none:
             break
         }
